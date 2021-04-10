@@ -1,24 +1,27 @@
-# README
+# shopify-multipass-api-on-rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Shopify Multipass APIでSSOを行うためのサンプルコード。
 
-Things you may want to cover:
+参照: [Ruby on Rails × Shopify Multipass APIでSSOを試してみる](https://qiita.com/kazama1209/items/7e16b2701cf9e27b1ca9)
 
-* Ruby version
+## セットアップ
 
-* System dependencies
+```
+$ cp .env.sample .env
+```
+```
+SHOPIFY_MULTIPASS_SECRET=マルチパスのシークレットキー
+SHOPIFY_STORE_DOMAIN=Shopifyストアのドメイン
+```
 
-* Configuration
+「.env」内にそれぞれの値をセット。
 
-* Database creation
+```
+$ docker-compose build
+$ docker-compose run web bundle exec rails webpacker:install
+$ docker-compose run web bundle exec rails db:create
+$ docker-compose run web bundle exec rails db:migrate
+$ docker-compose up -d
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+コンテナを起動。
