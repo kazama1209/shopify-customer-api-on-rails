@@ -20,14 +20,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+
+    ShopifyCustomer.new.update(resource.id, email: resource.email)
+  end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+
+    ShopifyCustomer.new.update(resource.id,
+      email: "retired_user_#{resource.id}@example.com",
+      tags: "withdrawn"
+    )
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
